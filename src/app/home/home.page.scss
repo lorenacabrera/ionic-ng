@@ -13,11 +13,11 @@
   line-height: 26px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+#container h1 {
+  font-size: 20px;
+  line-height: 26px;
 
-  color: #8c8c8c;
+  color: #b23e0c;
 
   margin: 0;
 }
@@ -25,3 +25,19 @@
 #container a {
   text-decoration: none;
 }
+ion-header {
+  background-color: #b23e0c; 
+  color: white; 
+  height: 80px; 
+
+  ion-toolbar {
+    font-size: 20px; 
+    justify-content: center; 
+  }
+}
+
+ion-title {
+  color: #b23e0c;
+}
+
+
