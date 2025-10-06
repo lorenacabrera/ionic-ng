@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { alumnosService } from '../services/alumnos-service';
+import { AlumnosService } from '../services/alumnos-service';
 
 @Component({
   selector: 'app-alumnos',
@@ -9,29 +9,17 @@ import { alumnosService } from '../services/alumnos-service';
 })
 export class AlumnosPage implements OnInit {
 
-  alumnos: any = [
-    {
-      id: 1,
-      nombre: "Juan",
-      apellidos: "Bar"
-    }, {
-      id: 2,
-      nombre: "Pedro",
-      apellidos: "Foo"
-
-    }
-  ]
-
-  constructor(private alumnosService: alumnosService) { }
+  alumnos: any = [];
+  
+  constructor(private alumnosService: AlumnosService) { }
 
   ngOnInit() {
     this.getAllAlumnos();
   }
 
   getAllAlumnos(){
-    this.alumnosService.getAllAlumnos().subscribe((response) => {
-      this.alumnos = response
+    this.alumnosService.getAlumnos().subscribe((response) => {
+      this.alumnos = response;
     });
   }
-
 }
