@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -8,6 +10,13 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  Alumno: string = "alumno";
+  Profesor: string = "profesor";
+
+  constructor(private router: Router) {}
+
+  gotoalumnos(){
+    this.router.navigateByUrl("/alumnos");
+  }
 
 }
