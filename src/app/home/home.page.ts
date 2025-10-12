@@ -10,13 +10,10 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-  Alumno: string = "alumno";
-  Profesor: string = "profesor";
-
   constructor(private router: Router) {}
 
-  gotoalumnos(){
-    this.router.navigateByUrl("/alumnos");
+  gotoAlumnos(){
+    this.router.navigate(["/alumnos"]);
   }
 
 }
