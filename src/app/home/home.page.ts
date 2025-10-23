@@ -12,8 +12,9 @@ export class HomePage {
 
   constructor(private router: Router) {}
 
-  gotoAlumnos(){
-    this.router.navigate(["/alumnos"]);
+  gotoAlumnos() {
+    console.log('Botón pulsado'); 
+    this.router.navigate(['/alumnos']); 
   }
 
 }

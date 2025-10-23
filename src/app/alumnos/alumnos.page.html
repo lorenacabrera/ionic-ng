@@ -4,16 +4,13 @@
   </ion-toolbar>
 </ion-header>
 
-
-
-<ion-list>
-  <ion-item *ngFor="let a of alumnos">
-    <ion-label>
-       <h3>{{a.nombre}}</h3>
-       <h2>{{a.apellidos}}</h2>
-    </ion-label>
-  </ion-item>
-</ion-list>
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let alumno of alumnos">
+      {{ alumno.nombre }} - {{ alumno.curso }}
+    </ion-item>
+  </ion-list>
+</ion-content>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
