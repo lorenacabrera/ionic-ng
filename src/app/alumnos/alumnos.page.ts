@@ -18,7 +18,7 @@ export class AlumnosPage implements OnInit {
   }
 
   getAllAlumnos(){
-    this.alumnosService.getAlumnos().subscribe((response) => {
+    this.alumnosService.getAlumnos().subscribe(response => {
       this.alumnos = response;
     });
   }
