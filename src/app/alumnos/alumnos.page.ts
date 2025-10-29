@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class AlumnosPage implements OnInit {
 
-  alumnos: any[] = [];
+  alumnos: any = [];
   alumnoForm!: FormGroup;
   
   constructor(
@@ -24,13 +24,13 @@ export class AlumnosPage implements OnInit {
     this.alumnoForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       apellido1: ['', Validators.required],
-      nacimiento: ['', Validators.required]
     });
   }
 
   getAllAlumnos(){
-    this.alumnosService.getAlumnos().subscribe(response => {
-      this.alumnos = response;
+    this.alumnosService.getAlumnos().subscribe({
+      next: (response) => this.alumnos = response,
+      error: (err) => console.error('error al obtener alumnos', err)
     });
   }
 }
