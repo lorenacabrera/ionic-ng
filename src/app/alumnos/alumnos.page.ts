@@ -33,4 +33,21 @@ export class AlumnosPage implements OnInit {
       error: (err) => console.error('error al obtener alumnos', err)
     });
   }
+
+  //crear nuevo alumno
+
+  crearAlumno() {
+    if (this.alumnoForm.invalid) return;
+
+    this.alumnosService.crearAlumno(this.alumnoForm.value).subscribe({
+      next: (res) => {
+      console.log('Alumno creado', res);
+      this.alumnoForm.reset();      // Limpia el formulario
+      this.getAllAlumnos();         // Refresca la lista
+    },
+      error: (err) => {console.error('Error al crear alumno', err)
+  }
+  });
 }
+}
+
