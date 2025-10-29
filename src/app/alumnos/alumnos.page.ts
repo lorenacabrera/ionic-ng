@@ -1,20 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { AlumnosService } from '../services/alumnos-service';
-
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 @Component({
   selector: 'app-alumnos',
   templateUrl: './alumnos.page.html',
   styleUrls: ['./alumnos.page.scss'],
-  standalone: false
+  //standalone: false
 })
 export class AlumnosPage implements OnInit {
 
-  alumnos: any = [];
+  alumnos: any[] = [];
+  alumnoForm!: FormGroup;
   
-  constructor(private alumnosService: AlumnosService) { }
+  constructor(
+    private alumnosService: AlumnosService,
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit() {
     this.getAllAlumnos();
+
+    //configuramos formulario con validaciones
+    this.alumnoForm = this.fb.group({
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      apellido1: ['', Validators.required],
+      nacimiento: ['', Validators.required]
+    });
   }
 
   getAllAlumnos(){
