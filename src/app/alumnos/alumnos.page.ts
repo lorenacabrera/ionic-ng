@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
   selector: 'app-alumnos',
   templateUrl: './alumnos.page.html',
   styleUrls: ['./alumnos.page.scss'],
-  //standalone: false
+
 })
 export class AlumnosPage implements OnInit {
 
@@ -48,6 +48,7 @@ export class AlumnosPage implements OnInit {
       error: (err) => {console.error('Error al crear alumno', err)
   }
   });
+  
 }
 }
 
