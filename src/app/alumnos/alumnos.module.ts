@@ -11,7 +11,7 @@ import { AlumnosPage } from './alumnos.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    AlumnosPageRoutingModule
+    AlumnosPageRoutingModule,
   ],
   declarations: [AlumnosPage]
 })

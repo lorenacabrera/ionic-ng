@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
   templateUrl: './alumnos.page.html',
   styleUrls: ['./alumnos.page.scss'],
 
+
 })
 export class AlumnosPage implements OnInit {
 
