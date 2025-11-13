@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AlumnosService {
 
-  endpoint: string = "http://localhost:3000/api/alumnos";
+  endpoint: string = "http://localhost:3000/api/alumno";
 
   constructor(private httpClient: HttpClient) {}
 

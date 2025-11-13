@@ -12,6 +12,7 @@ export class AlumnosPage implements OnInit {
 
   alumnos: any = [];
   alumnoForm!: FormGroup;
+  editandoId: number | null = null;
   
   constructor(
     private alumnosService: AlumnosService,
@@ -19,9 +20,10 @@ export class AlumnosPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.inicializarFormulario();
     this.getAllAlumnos();
-
-    //configuramos formulario con validaciones
+  }
+    inicializarFormulario(){
     this.alumnoForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       apellido1: ['', Validators.required],
@@ -35,21 +37,54 @@ export class AlumnosPage implements OnInit {
     });
   }
 
-  //crear nuevo alumno
-
-  crearAlumno() {
+  guardarAlumno() {
     if (this.alumnoForm.invalid) return;
 
-    this.alumnosService.crearAlumno(this.alumnoForm.value).subscribe({
-      next: (res) => {
-      console.log('Alumno creado', res);
-      this.alumnoForm.reset();      // Limpia el formulario
-      this.getAllAlumnos();         // Refresca la lista
-    },
-      error: (err) => {console.error('Error al crear alumno', err)
+    if (this.editandoId) {
+      // Actualizamos
+      this.alumnosService.actualizarAlumno(this.editandoId, this.alumnoForm.value).subscribe({
+        next: res => {
+          console.log('Alumno actualizado', res);
+          this.alumnoForm.reset();
+          this.editandoId = null;
+          this.getAllAlumnos();
+        },
+        error: err => console.error('Error al actualizar alumno', err)
+      });
+    } else {
+      // Creamos
+      this.alumnosService.crearAlumno(this.alumnoForm.value).subscribe({
+        next: res => {
+          console.log('Alumno creado', res);
+          this.alumnoForm.reset();
+          this.getAllAlumnos();
+        },
+        error: err => console.error('Error al crear alumno', err)
+      });
+    }
   }
-  });
-  
-}
-}
+  editarAlumno(alumno: any) {
+    this.editandoId = alumno.id;
+    this.alumnoForm.patchValue({
+      nombre: alumno.nombre,
+      apellido1: alumno.apellido1
+    });
+  }
 
+  eliminarAlumno(id: number) {
+    if (confirm('¿Estás seguro de eliminar este alumno?')) {
+      this.alumnosService.eliminarAlumno(id).subscribe({
+        next: res => {
+          console.log('Alumno eliminado', res);
+          this.getAllAlumnos();
+        },
+        error: err => console.error('Error al eliminar alumno', err)
+      });
+    }
+  }
+
+  cancelarEdicion() {
+    this.editandoId = null;
+    this.alumnoForm.reset();
+  }
+}
