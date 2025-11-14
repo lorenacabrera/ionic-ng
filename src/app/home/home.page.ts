@@ -18,4 +18,8 @@ export class HomePage {
     this.router.navigate(['/alumnos']); 
   }
 
+  gotoNiveles() {
+    this.router.navigate(['/niveles']);
+  }
+
 }
