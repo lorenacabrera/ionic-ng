@@ -22,4 +22,8 @@ export class HomePage {
     this.router.navigate(['/niveles']);
   }
 
+  gotoCalendario() {
+    this.router.navigate(['/calendario']); // crea esta página luego
+  }
+
 }

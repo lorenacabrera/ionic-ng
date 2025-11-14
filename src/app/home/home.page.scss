@@ -1,23 +1,26 @@
 .home-image-container {
-  width: 100%;
-  height: calc(100vh - 80px); 
-  overflow: hidden;
-}
-
-.home-image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; 
-  display: block;
-}
-
-
-.home-button,
-.home-button2 {
   position: absolute;
-  bottom: 20px;
+  top: 56px; // altura del header
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // para que la imagen ocupe todo el espacio
+  }
+}
+
+.button-container {
+  position: absolute;
+  bottom: 30px;
   left: 20px;
   right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 
