@@ -6,7 +6,7 @@ import { NivelesService } from '../services/niveles';
   selector: 'app-niveles',
   templateUrl: './niveles.page.html',
   styleUrls: ['./niveles.page.scss'],
-  standalone:false,
+  standalone: false
 })
 export class NivelesPage implements OnInit {
 
@@ -38,6 +38,7 @@ export class NivelesPage implements OnInit {
     if (this.nivelForm.invalid) return;
 
     if (this.editandoId) {
+      // Actualizar
       this.nivelesService.actualizarNivel(this.editandoId, this.nivelForm.value).subscribe({
         next: res => {
           this.nivelForm.reset();
@@ -47,6 +48,7 @@ export class NivelesPage implements OnInit {
         error: err => console.error('Error al actualizar nivel', err)
       });
     } else {
+      // Crear
       this.nivelesService.crearNivel(this.nivelForm.value).subscribe({
         next: res => {
           this.nivelForm.reset();
@@ -76,4 +78,3 @@ export class NivelesPage implements OnInit {
     this.nivelForm.reset();
   }
 }
-
