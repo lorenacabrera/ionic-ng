@@ -1,22 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Estudio Integral de
-      Danza Gisella
+      Estudio Integral de Danza Gisella
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div id="container">
-    <h1> Alumnos </h1> 
+<ion-content fullscreen>
+  <div class="home-image-container">
+    <img src="assets/ensayo.jpg" alt="ensayo" />
   </div>
-</ion-content>
 
-<ion-button expand="block" (click)="gotoAlumnos()">
+  <ion-button expand="block" (click)="gotoAlumnos()">
     Ir a Alumnos
   </ion-button>
 
-<ion-button expand="block" (click)="gotoNiveles()">
+  <ion-button expand="block" color="secondary" (click)="gotoNiveles()">
     Ir a Niveles
   </ion-button>
+
+</ion-content>
