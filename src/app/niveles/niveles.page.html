@@ -5,9 +5,10 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
   <form [formGroup]="nivelForm" (ngSubmit)="guardarNivel()">
     <ion-item>
-      <ion-label position="floating">Nombre del Nivel</ion-label>
+      <ion-label position="floating">Nombre del nivel</ion-label>
       <ion-input formControlName="nombre"></ion-input>
     </ion-item>
 
@@ -30,4 +31,5 @@
       </ion-button>
     </ion-item>
   </ion-list>
+
 </ion-content>
