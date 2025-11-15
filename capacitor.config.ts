@@ -3,7 +3,15 @@ import type { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
   appName: 'prueba',
-  webDir: 'www'
+  webDir: 'www',
+
+  plugins: {
+    Camera: {
+      allowEditing: false,
+      resultType: 'dataUrl',
+      saveToGallery: false
+    }
+  }
 };
 
 export default config;
