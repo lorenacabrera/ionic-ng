@@ -26,17 +26,13 @@ export class FotosPage {
     this.photoService.takePhoto();
   }
 
-  // Guardar registro en el array
   guardarRegistro() {
     if (this.registroForm.valid) {
-      const newPhoto: Photo = {
-        ...this.registroForm.value,
-        base64: this.photoService.photos[0]?.base64 || ''
-      };
-      this.photoService.addPhoto(newPhoto);
+      this.photoService.addPhoto(this.registroForm.value); // Se envía al backend
       this.registroForm.reset();
     }
   }
+  
 
   // Eliminar
   eliminarRegistro(photo: Photo) {

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 export interface Photo {
@@ -15,8 +16,9 @@ export class PhotoService {
 
   public photos: Photo[] = [];
   private nextId = 1;
+  private apiUrl = 'http://localhost:3000/photos'; // Cambia según tu backend
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   // Captura foto
   public async takePhoto() {
@@ -35,18 +37,24 @@ export class PhotoService {
     this.photos.unshift(newPhoto);
   }
 
-  // Añadir registro manual (para el CRUD)
+  // Añadir registro en memoria y al backend
   public addPhoto(photo: Photo) {
     photo.id = this.nextId++;
     this.photos.unshift(photo);
+
+    // Enviar al backend
+    this.http.post(this.apiUrl, photo).subscribe({
+      next: () => console.log('Foto enviada al backend'),
+      error: err => console.error('Error al enviar la foto', err)
+    });
   }
 
-  // Eliminar registro
+  // Eliminar registro (en memoria, opcional backend)
   public deletePhoto(id: number) {
     this.photos = this.photos.filter(p => p.id !== id);
   }
 
-  // Actualizar registro
+  // Actualizar registro (en memoria, opcional backend)
   public updatePhoto(updated: Photo) {
     const index = this.photos.findIndex(p => p.id === updated.id);
     if (index > -1) this.photos[index] = updated;
