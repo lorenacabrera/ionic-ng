@@ -1,19 +1,18 @@
+import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
-import { IonicModule } from '@ionic/angular';
-
-import { FotosPageRoutingModule } from './fotos-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { FotosPage } from './fotos.page';
 
 @NgModule({
   imports: [
+    IonicModule,
     CommonModule,
     FormsModule,
-    IonicModule,
-    FotosPageRoutingModule
+    ReactiveFormsModule,
+    RouterModule.forChild([{ path: '', component: FotosPage }])
   ],
   declarations: [FotosPage]
 })

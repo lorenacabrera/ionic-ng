@@ -17,7 +17,11 @@
   <!-- add to homescreen for ios -->
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+  <!-- CSP para desarrollo -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: http://localhost:8100 'unsafe-eval' 'unsafe-inline'; img-src 'self' data:;">
 </head>
+
 
 <body>
   <app-root></app-root>
