@@ -4,11 +4,12 @@ import { PhotoService, Photo } from '../services/photo';
 
 @Component({
   selector: 'app-fotos',
-  templateUrl: 'fotos.page.html',
-  styleUrls: ['fotos.page.scss'],
+  templateUrl: './fotos.page.html',
+  styleUrls: ['./fotos.page.scss'],
   standalone:false,
 })
 export class FotosPage {
+
   registroForm: FormGroup;
 
   constructor(
@@ -21,21 +22,30 @@ export class FotosPage {
     });
   }
 
-  // Captura foto con la cámara
-  addPhotoToGallery() {
-    this.photoService.takePhoto();
+  async takePhoto() {
+    await this.photoService.takePhoto();
   }
 
   guardarRegistro() {
-    if (this.registroForm.valid) {
-      this.photoService.addPhoto(this.registroForm.value); // Se envía al backend
-      this.registroForm.reset();
-    }
-  }
-  
+    if (this.registroForm.invalid) return;
 
-  // Eliminar
-  eliminarRegistro(photo: Photo) {
-    if (photo.id != null) this.photoService.deletePhoto(photo.id);
+    const lastPhoto = this.photoService.photos[0];
+    if (!lastPhoto) {
+      alert("Primero toma una foto");
+      return;
+    }
+
+    // Actualizar foto con los datos del formulario
+    lastPhoto.title = this.registroForm.value.title;
+    lastPhoto.description = this.registroForm.value.description;
+
+    // Crear copia para que no se sobreescriba
+    this.photoService.updatePhoto({ ...lastPhoto });
+
+    this.registroForm.reset();
+  }
+
+  eliminarRegistro(p: Photo) {
+    this.photoService.deletePhoto(p.id!);
   }
 }

@@ -1,12 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isStandalone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+
+
 
 export interface Photo {
   base64: string;
   title?: string;
   description?: string;
   id?: number;
+
 }
 
 @Injectable({

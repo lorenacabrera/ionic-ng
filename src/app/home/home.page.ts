@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -14,8 +14,7 @@ export class HomePage {
   constructor(private router: Router) {}
 
   gotoAlumnos() {
-    console.log('Botón pulsado'); 
-    this.router.navigate(['/alumnos']); 
+    this.router.navigate(['/alumnos']);
   }
 
   gotoNiveles() {
@@ -23,7 +22,13 @@ export class HomePage {
   }
 
   gotoCalendario() {
-    this.router.navigate(['/calendario']); // crea esta página luego
+    this.router.navigate(['/calendario']);
+  }
+
+  gotoFotos() {
+    this.router.navigate(['/fotos']);
   }
 
 }
+
+  

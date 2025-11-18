@@ -1,42 +1,64 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
     <ion-title>Fotos</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-button expand="full" (click)="addPhotoToGallery()">
-    Capturar Foto
-  </ion-button>
 
+<ion-content class="ion-padding">
+
+  <!-- FAB: Botón flotante para tomar foto -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="takePhoto()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Formulario -->
   <form [formGroup]="registroForm" (ngSubmit)="guardarRegistro()">
     <ion-item>
-      <ion-label position="stacked">Título</ion-label>
+      <ion-label position="floating">Título</ion-label>
       <ion-input formControlName="title"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Descripción</ion-label>
+      <ion-label position="floating">Descripción</ion-label>
       <ion-textarea formControlName="description"></ion-textarea>
     </ion-item>
 
-    <ion-button expand="full" type="submit" [disabled]="registroForm.invalid">
+    <ion-button expand="block" class="ion-margin-top" type="submit" [disabled]="registroForm.invalid">
       Guardar registro
     </ion-button>
   </form>
 
-  <ion-list *ngIf="photoService.photos.length > 0">
-    <ion-item *ngFor="let p of photoService.photos">
-      <ion-thumbnail slot="start">
-        <img [src]="p.base64" />
-      </ion-thumbnail>
-      <ion-label>
-        <h2>{{ p.title }}</h2>
-        <p>{{ p.description }}</p>
-      </ion-label>
-      <ion-button color="danger" fill="clear" (click)="eliminarRegistro(p)">
-        Eliminar
-      </ion-button>
-    </ion-item>
-  </ion-list>
+  <!-- Grid con tarjetas -->
+  <ion-grid class="ion-margin-top">
+    <ion-row>
+      <ion-col size="12" size-md="6" *ngFor="let p of photoService.photos">
+        <ion-card>
+          <img [src]="p.base64" />
+
+          <ion-card-header>
+            <ion-card-title>{{ p.title || 'Sin título' }}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <p>{{ p.description || 'Sin descripción' }}</p>
+          </ion-card-content>
+
+          <ion-item lines="none">
+            <ion-button color="danger" fill="clear" (click)="eliminarRegistro(p)">
+              <ion-icon name="trash"></ion-icon>
+              Eliminar
+            </ion-button>
+          </ion-item>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
