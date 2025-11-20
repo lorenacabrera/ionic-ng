@@ -1,6 +1,4 @@
-/* -------------------------------------
-   ENCABEZADO (MISMO ESTILO DE LA APP)
---------------------------------------*/
+
 ion-header {
   background-color: #b23e0c;
   color: white;
@@ -16,14 +14,10 @@ ion-title {
   color: #b23e0c;
 }
 
-/* -------------------------------------
-   FORMULARIO
---------------------------------------*/
 ion-item {
   margin-bottom: 12px;
 }
 
-/* BOTÓN SUBIR / ACTUALIZAR */
 .btn-crear {
   display: block;
   width: 90%;
@@ -34,7 +28,6 @@ ion-item {
   --border-radius: 8px;
 }
 
-/* BOTÓN CANCELAR */
 .btn-cancelar {
   display: block;
   width: 90%;
@@ -45,9 +38,6 @@ ion-item {
   --border-radius: 8px;
 }
 
-/* -------------------------------------
-   GALERÍA EN GRID
---------------------------------------*/
 .galeria {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -55,24 +45,19 @@ ion-item {
   padding-top: 20px;
 }
 
-/* TARJETAS DE FOTOS */
 ion-card {
   border-radius: 16px;
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* sombra suave */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15); 
   text-align: center;
   padding-bottom: 12px;
 }
-
-/* IMAGEN */
 ion-card img {
   width: 100%;
   height: 160px;
   object-fit: cover;
 }
-
-/* TÍTULO */
 ion-card-title {
   color: #b23e0c;
   font-size: 18px;
@@ -80,9 +65,7 @@ ion-card-title {
   text-align: center;
 }
 
-/* -------------------------------------
-   BOTONES (EDITAR / ELIMINAR)
---------------------------------------*/
+
 ion-card-content ion-button {
   margin-top: 12px;
   width: 100%;
@@ -92,7 +75,7 @@ ion-card-content ion-button {
   font-size: 15px;
 }
 
-/* EL BOTÓN ELIMINAR EN ROJO */
+
 ion-card-content ion-button[color="danger"] {
   --background: #cc0000 !important; /* rojo */
   --color: #fff !important;          /* texto blanco */

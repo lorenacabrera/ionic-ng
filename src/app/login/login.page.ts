@@ -19,7 +19,7 @@ export class LoginPage {
     private nav: NavController
   ) {}
 
-  // LOGIN BÁSICO
+  // Login basico
   loginBasic() {
     this.auth.loginBasic(this.email, this.password).subscribe({
       next: res => {
@@ -33,7 +33,7 @@ export class LoginPage {
     });
   }
 
-  // LOGIN TOKEN
+  // login token
   loginToken() {
     this.auth.loginToken(this.email, this.password).subscribe({
       next: async (res: any) => {

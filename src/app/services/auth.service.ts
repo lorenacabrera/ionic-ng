@@ -14,12 +14,12 @@ export class AuthService {
     this.storage.create();
   }
 
-  // REGISTRO
+  // registro
   register(email: string, password: string) {
     return this.http.post(`${this.baseUrl}/register`, { email, password });
   }
 
-  // LOGIN BÁSICO (Autenticación básica real)
+  // login basico (Autenticación básica real)
   loginBasic(email: string, password: string) {
     const basic = btoa(`${email}:${password}`);
 
@@ -30,22 +30,22 @@ export class AuthService {
     );
   }
 
-  // LOGIN CON TOKEN
+  // login token
   loginToken(email: string, password: string) {
     return this.http.post(`${this.baseUrl}/login-token`, { email, password });
   }
 
-  // GUARDAR TOKEN
+  // guardar token
   async guardarToken(token: string) {
     await this.storage.set(this.tokenKey, token);
   }
 
-  // OBTENER TOKEN
+  // obtener token
   async obtenerToken() {
     return this.storage.get(this.tokenKey);
   }
 
-  // LOGOUT
+  // salir/eliminar token
   async logout() {
     await this.storage.remove(this.tokenKey);
   }

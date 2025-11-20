@@ -1,4 +1,4 @@
-/* Contenedor general para centrar el contenido */
+
 .login-container {
     display: flex;
     flex-direction: column;
@@ -6,9 +6,8 @@
     padding: 20px;
   }
   
-  /* Botones solo del login */
   .login-btn {
-    width: 200px;              /* ancho fijo normal */
+    width: 200px;             
     height: 44px;
     margin: 12px 0;
     --border-radius: 8px;

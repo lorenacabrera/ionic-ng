@@ -9,7 +9,6 @@
 
 <ion-content class="ion-padding">
 
-  <!-- FORMULARIO -->
   <form [formGroup]="fotoForm" (ngSubmit)="guardarFoto()">
 
     <ion-item>
@@ -22,12 +21,10 @@
       <input type="file" (change)="seleccionarArchivo($event)">
     </ion-item>
 
-    <!-- BOTÓN CREAR / ACTUALIZAR -->
     <ion-button expand="block" class="btn-crear" type="submit">
       {{ editandoId ? 'Actualizar Foto' : 'Subir Foto' }}
     </ion-button>
 
-    <!-- BOTÓN CANCELAR -->
     <ion-button *ngIf="editandoId"
                 expand="block"
                 class="btn-cancelar"
@@ -37,8 +34,7 @@
     </ion-button>
 
   </form>
-
-  <!-- LISTA SIMPLE DE FOTOS (versión estable) -->
+  
   <ion-list>
     <ion-item *ngFor="let foto of fotos">
 

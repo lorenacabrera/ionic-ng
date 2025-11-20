@@ -52,7 +52,7 @@ export class FotosPage implements OnInit {
     }
 
     if (this.editandoId) {
-      // ACTUALIZAR
+      // actualizar
       this.fotosService.actualizarFoto(this.editandoId, formData).subscribe({
         next: () => {
           this.cargarFotos();
@@ -60,7 +60,7 @@ export class FotosPage implements OnInit {
         }
       });
     } else {
-      // CREAR
+      // crear
       this.fotosService.subirFoto(formData).subscribe({
         next: () => {
           this.cargarFotos();
