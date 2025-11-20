@@ -12,3 +12,24 @@ ion-header {
   ion-title {
     color: #b23e0c;
   }
+  ion-button {
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    --border-radius: 8px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  ion-button.btn-crear,
+ion-button.btn-cancelar {
+  display: block;
+  width: 90%;          /* Ocupa ancho normal */
+  max-width: 280px;    /* NO se estira toda la pantalla */
+  margin: 20px auto;   /* Centrado */
+  height: 48px;        /* Altura normal */
+  font-size: 16px;     /* Tamaño normal */
+  --height: 48px;      /* Forzar altura interna */
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+}
+  

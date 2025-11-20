@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PhotoService, Photo } from '../services/photo';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { FotosService } from '../services/fotos.service';
 
 @Component({
   selector: 'app-fotos',
@@ -8,44 +8,95 @@ import { PhotoService, Photo } from '../services/photo';
   styleUrls: ['./fotos.page.scss'],
   standalone:false,
 })
-export class FotosPage {
+export class FotosPage implements OnInit {
 
-  registroForm: FormGroup;
+  fotoForm: FormGroup;
+  fotos: any[] = [];
+
+  archivoSeleccionado: File | null = null;
+  editandoId: number | null = null;
 
   constructor(
-    public photoService: PhotoService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private fotosService: FotosService
   ) {
-    this.registroForm = this.fb.group({
-      title: ['', Validators.required],
-      description: ['']
+    // Creamos el formulario
+    this.fotoForm = this.fb.group({
+      titulo: ['']
     });
   }
 
-  async takePhoto() {
-    await this.photoService.takePhoto();
+  ngOnInit() {
+    this.cargarFotos();
   }
 
-  guardarRegistro() {
-    if (this.registroForm.invalid) return;
+  // Cargar lista de fotos
+  cargarFotos() {
+    this.fotosService.getFotos().subscribe({
+      next: (data) => {
+        this.fotos = data;
+      },
+      error: (err) => {
+        console.error("Error cargando fotos", err);
+      }
+    });
+  }
 
-    const lastPhoto = this.photoService.photos[0];
-    if (!lastPhoto) {
-      alert("Primero toma una foto");
-      return;
+  // Guardar o actualizar foto
+  guardarFoto() {
+    const formData = new FormData();
+    formData.append("titulo", this.fotoForm.value.titulo);
+
+    if (this.archivoSeleccionado) {
+      formData.append("foto", this.archivoSeleccionado);
     }
 
-    // Actualizar foto con los datos del formulario
-    lastPhoto.title = this.registroForm.value.title;
-    lastPhoto.description = this.registroForm.value.description;
-
-    // Crear copia para que no se sobreescriba
-    this.photoService.updatePhoto({ ...lastPhoto });
-
-    this.registroForm.reset();
+    if (this.editandoId) {
+      // ACTUALIZAR
+      this.fotosService.actualizarFoto(this.editandoId, formData).subscribe({
+        next: () => {
+          this.cargarFotos();
+          this.cancelarEdicion();
+        }
+      });
+    } else {
+      // CREAR
+      this.fotosService.subirFoto(formData).subscribe({
+        next: () => {
+          this.cargarFotos();
+          this.fotoForm.reset();
+        }
+      });
+    }
   }
 
-  eliminarRegistro(p: Photo) {
-    this.photoService.deletePhoto(p.id!);
+  // Seleccionar archivo desde input file
+  seleccionarArchivo(event: any) {
+    this.archivoSeleccionado = event.target.files[0];
+  }
+
+  // Editar foto
+  editarFoto(foto: any) {
+    this.editandoId = foto.id;
+    this.fotoForm.patchValue({
+      titulo: foto.titulo
+    });
+    this.archivoSeleccionado = null;
+  }
+
+  // Cancelar edición
+  cancelarEdicion() {
+    this.editandoId = null;
+    this.archivoSeleccionado = null;
+    this.fotoForm.reset();
+  }
+
+  // Eliminar foto
+  eliminarFoto(id: number) {
+    this.fotosService.eliminarFoto(id).subscribe({
+      next: () => {
+        this.cargarFotos();
+      }
+    });
   }
 }

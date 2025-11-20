@@ -63,6 +63,7 @@ export class AlumnosPage implements OnInit {
       });
     }
   }
+  //editamos
   editarAlumno(alumno: any) {
     this.editandoId = alumno.id;
     this.alumnoForm.patchValue({
@@ -70,7 +71,7 @@ export class AlumnosPage implements OnInit {
       apellido1: alumno.apellido1
     });
   }
-
+  //eliminamos
   eliminarAlumno(id: number) {
     if (confirm('¿Estás seguro de eliminar este alumno?')) {
       this.alumnosService.eliminarAlumno(id).subscribe({

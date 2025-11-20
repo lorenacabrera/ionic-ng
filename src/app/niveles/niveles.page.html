@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar >
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
@@ -10,28 +10,44 @@
 <ion-content class="ion-padding">
 
   <form [formGroup]="nivelForm" (ngSubmit)="guardarNivel()">
+
     <ion-item>
       <ion-label position="floating">Nombre del nivel</ion-label>
       <ion-input formControlName="nombre"></ion-input>
     </ion-item>
 
-    <ion-button expand="full" type="submit">
+    <ion-button class="btn-crear" type="submit">
       {{ editandoId ? 'Actualizar Nivel' : 'Crear Nivel' }}
     </ion-button>
-    <ion-button *ngIf="editandoId" expand="full" color="medium" (click)="cancelarEdicion()">
+
+    <ion-button *ngIf="editandoId"
+                class="btn-cancelar"
+                color="medium"
+                (click)="cancelarEdicion()">
       Cancelar
     </ion-button>
+
   </form>
 
   <ion-list>
     <ion-item *ngFor="let nivel of niveles">
+
       {{ nivel.nombre }}
-      <ion-button fill="clear" color="primary" slot="end" (click)="editarNivel(nivel)">
+
+      <ion-button fill="clear"
+                  color="primary"
+                  slot="end"
+                  (click)="editarNivel(nivel)">
         Editar
       </ion-button>
-      <ion-button fill="clear" color="danger" slot="end" (click)="eliminarNivel(nivel.id)">
+
+      <ion-button fill="clear"
+                  color="danger"
+                  slot="end"
+                  (click)="eliminarNivel(nivel.id)">
         Eliminar
       </ion-button>
+
     </ion-item>
   </ion-list>
 

@@ -1,14 +1,38 @@
+/* ------------------------------
+   ENCABEZADO (MISMO ESTILO)
+--------------------------------*/
 ion-header {
-    background-color: #b23e0c; 
-    color: white; 
-    height: 80px; 
-  
-    ion-toolbar {
-      font-size: 20px; 
-      justify-content: center; 
-    }
+  background-color: #b23e0c; 
+  color: white; 
+  height: 80px;
+
+  ion-toolbar {
+    font-size: 20px;
+    justify-content: center;
   }
-  
-  ion-title {
-    color: #b23e0c;
-  }
+}
+
+ion-title {
+  color: #b23e0c;
+}
+
+/* ------------------------------
+   FORMULARIO
+--------------------------------*/
+ion-item {
+  margin-bottom: 12px;
+}
+
+/* ------------------------------
+   BOTONES
+--------------------------------*/
+.btn-crear,
+.btn-cancelar {
+  display: block;
+  width: 90%;
+  max-width: 280px;
+  margin: 20px auto;
+  height: 48px;
+  font-size: 16px;
+  --border-radius: 8px;
+}

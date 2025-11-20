@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar >
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
@@ -8,54 +8,57 @@
 </ion-header>
 
 <ion-content class="ion-padding">
- 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="primary" (click)="takePhoto()">
-      <ion-icon name="camera"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 
-    <form [formGroup]="registroForm" (ngSubmit)="guardarRegistro()">
+  <!-- FORMULARIO -->
+  <form [formGroup]="fotoForm" (ngSubmit)="guardarFoto()">
+
     <ion-item>
       <ion-label position="floating">Título</ion-label>
-      <ion-input formControlName="title"></ion-input>
+      <ion-input formControlName="titulo"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Descripción</ion-label>
-      <ion-textarea formControlName="description"></ion-textarea>
+      <ion-label>Seleccionar imagen</ion-label>
+      <input type="file" (change)="seleccionarArchivo($event)">
     </ion-item>
 
-    <ion-button expand="block" class="ion-margin-top" type="submit" [disabled]="registroForm.invalid">
-      Guardar registro
+    <!-- BOTÓN CREAR / ACTUALIZAR -->
+    <ion-button expand="block" class="btn-crear" type="submit">
+      {{ editandoId ? 'Actualizar Foto' : 'Subir Foto' }}
     </ion-button>
+
+    <!-- BOTÓN CANCELAR -->
+    <ion-button *ngIf="editandoId"
+                expand="block"
+                class="btn-cancelar"
+                color="medium"
+                (click)="cancelarEdicion()">
+      Cancelar
+    </ion-button>
+
   </form>
 
-  
-  <ion-grid class="ion-margin-top">
-    <ion-row>
-      <ion-col size="12" size-md="6" *ngFor="let p of photoService.photos">
-        <ion-card>
-          <img [src]="p.base64" />
+  <!-- LISTA SIMPLE DE FOTOS (versión estable) -->
+  <ion-list>
+    <ion-item *ngFor="let foto of fotos">
 
-          <ion-card-header>
-            <ion-card-title>{{ p.title || 'Sin título' }}</ion-card-title>
-          </ion-card-header>
+      <ion-thumbnail slot="start">
+        <img [src]="foto.url">
+      </ion-thumbnail>
 
-          <ion-card-content>
-            <p>{{ p.description || 'Sin descripción' }}</p>
-          </ion-card-content>
+      <ion-label>
+        {{ foto.titulo }}
+      </ion-label>
 
-          <ion-item lines="none">
-            <ion-button color="danger" fill="clear" (click)="eliminarRegistro(p)">
-              <ion-icon name="trash"></ion-icon>
-              Eliminar
-            </ion-button>
-          </ion-item>
+      <ion-button fill="clear" color="primary" slot="end" (click)="editarFoto(foto)">
+        Editar
+      </ion-button>
 
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      <ion-button fill="clear" color="danger" slot="end" (click)="eliminarFoto(foto.id)">
+        Eliminar
+      </ion-button>
+
+    </ion-item>
+  </ion-list>
 
 </ion-content>

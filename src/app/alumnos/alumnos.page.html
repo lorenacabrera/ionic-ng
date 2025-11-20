@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar >
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
@@ -10,32 +10,51 @@
 <ion-content class="ion-padding">
 
   <form [formGroup]="alumnoForm" (ngSubmit)="guardarAlumno()">
+
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
       <ion-input formControlName="nombre"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label position="floating">Apellido</ion-label>
       <ion-input formControlName="apellido1"></ion-input>
     </ion-item>
 
-    <ion-button expand="full" type="submit">
+    <!-- BOTÓN CREAR / ACTUALIZAR -->
+    <ion-button class="btn-crear" type="submit">
       {{ editandoId ? 'Actualizar Alumno' : 'Crear Alumno' }}
     </ion-button>
-    <ion-button *ngIf="editandoId" expand="full" color="medium" (click)="cancelarEdicion()">
+
+    <!-- BOTÓN CANCELAR SOLO SI ESTAMOS EDITANDO -->
+    <ion-button *ngIf="editandoId"
+                class="btn-cancelar"
+                color="medium"
+                (click)="cancelarEdicion()">
       Cancelar
     </ion-button>
+
   </form>
 
   <ion-list>
     <ion-item *ngFor="let alumno of alumnos">
+
       {{ alumno.nombre }} - {{ alumno.apellido1 }}
-      <ion-button fill="clear" color="primary" slot="end" (click)="editarAlumno(alumno)">
+
+      <ion-button fill="clear"
+                  color="primary"
+                  slot="end"
+                  (click)="editarAlumno(alumno)">
         Editar
       </ion-button>
-      <ion-button fill="clear" color="danger" slot="end" (click)="eliminarAlumno(alumno.id)">
+
+      <ion-button fill="clear"
+                  color="danger"
+                  slot="end"
+                  (click)="eliminarAlumno(alumno.id)">
         Eliminar
       </ion-button>
+
     </ion-item>
   </ion-list>
 
