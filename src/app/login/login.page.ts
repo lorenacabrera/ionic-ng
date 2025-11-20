@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth';
+import { NavController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -8,20 +10,40 @@ import { AuthService } from '../services/auth';
   standalone:false,
 })
 export class LoginPage {
-  email: string = '';
-  password: string = '';
 
-  constructor(private authService: AuthService) {}
+  email = "";
+  password = "";
 
-  login() {
-    this.authService.login(this.email, this.password).subscribe({
+  constructor(
+    private auth: AuthService,
+    private nav: NavController
+  ) {}
+
+  // LOGIN BÁSICO
+  loginBasic() {
+    this.auth.loginBasic(this.email, this.password).subscribe({
       next: res => {
-        console.log('Login exitoso', res);
-        //  redirigir a otra página si
+        console.log("Login Básico correcto:", res);
+        this.nav.navigateRoot('/home');
       },
       error: err => {
-        console.error('Login fallido', err);
-        alert('Credenciales incorrectas');
+        console.error(err);
+        alert("Error en login básico");
+      }
+    });
+  }
+
+  // LOGIN TOKEN
+  loginToken() {
+    this.auth.loginToken(this.email, this.password).subscribe({
+      next: async (res: any) => {
+        console.log("Login Token correcto:", res);
+        await this.auth.guardarToken(res.token);
+        this.nav.navigateRoot('/home');
+      },
+      error: err => {
+        console.error(err);
+        alert("Error en login con token");
       }
     });
   }

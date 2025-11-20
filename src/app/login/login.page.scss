@@ -1,0 +1,18 @@
+/* Contenedor general para centrar el contenido */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Botones solo del login */
+  .login-btn {
+    width: 200px;              /* ancho fijo normal */
+    height: 44px;
+    margin: 12px 0;
+    --border-radius: 8px;
+    font-size: 16px;
+    display: block;
+  }
+  

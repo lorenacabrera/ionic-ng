@@ -15,7 +15,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
     IonicModule.forRoot(),
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
     IonicStorageModule.forRoot(),
   
     
